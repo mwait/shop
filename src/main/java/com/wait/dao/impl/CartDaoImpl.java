@@ -26,7 +26,7 @@ public class CartDaoImpl implements CartDao {
             throw new IllegalArgumentException(String.format("Cannot create a cart. A cart with the given id(%)" +
                     "already exists", cart.getCartId()));
         }
-        listOfCarts.put(cart.getCartId(), cart);
+    //    listOfCarts.put(cart.getCartId(), cart);
         return cart;
     }
 

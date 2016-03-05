@@ -5,16 +5,79 @@ package com.wait.model;
 
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Created by mc on 2016-02-27.
  */
 
-
+@Entity
 public class Cart implements Serializable {
-    private String cartId;
+    
+	
+	private static final long serialVersionUID = 7339538708297341393L;
+	
+	@Id
+	@GeneratedValue
+	private int cartId;
+	
+	@OneToMany(mappedBy="cart", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<CartItem> cartItem;
+	
+	@OneToOne
+	@JoinColumn(name="customerId")
+	@JsonIgnore
+	private Customer customer;
+	
+	private double grandTota;
+
+	public int getCartId() {
+		return cartId;
+	}
+
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
+	}
+
+	public List<CartItem> getCartItem() {
+		return cartItem;
+	}
+
+	public void setCartItem(List<CartItem> cartItem) {
+		this.cartItem = cartItem;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public double getGrandTota() {
+		return grandTota;
+	}
+
+	public void setGrandTota(double grandTota) {
+		this.grandTota = grandTota;
+	}
+	
+	
+	
+	
+	/*private String cartId;
     private Map<String, CartItem> cartItems;
     private double grandTotal;
 
@@ -81,5 +144,5 @@ public class Cart implements Serializable {
         for(CartItem item : cartItems.values()){
             grandTotal = grandTotal + item.getTotalPrice();
         }
-    }
+    }*/
 }

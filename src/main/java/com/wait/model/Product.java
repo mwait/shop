@@ -4,12 +4,24 @@ package com.wait.model;
 
 
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+import javax.validation.constraints.Min;
+
+import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Created by mc on 2016-02-21.
@@ -18,7 +30,9 @@ import java.io.Serializable;
 @Entity
 public class Product implements Serializable {
 
-    @Id
+	private static final long serialVersionUID = -6778062720837804980L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int productId;
 
@@ -37,6 +51,10 @@ public class Product implements Serializable {
 
     @Transient
     private MultipartFile productImage;
+    
+    @OneToMany(mappedBy="product", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+    @JsonIgnore
+    private List<CartItem> cartItemList;
 
     public String getProductName() {
         return productName;
@@ -115,5 +133,15 @@ public class Product implements Serializable {
     public void setProductImage(MultipartFile productImage) {
         this.productImage = productImage;
     }
+
+	public List<CartItem> getCartItemList() {
+		return cartItemList;
+	}
+
+	public void setCartItemList(List<CartItem> cartItemList) {
+		this.cartItemList = cartItemList;
+	}
+    
+    
 
 }
