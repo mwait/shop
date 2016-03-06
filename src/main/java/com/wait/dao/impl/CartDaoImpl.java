@@ -2,6 +2,8 @@ package com.wait.dao.impl;
 
 
 
+import java.io.IOException;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,16 @@ public class CartDaoImpl implements CartDao {
 
 		int cartId = cart.getCartId();
 		//todo later
+	}
+	
+	public Cart validate(int cartId) throws IOException {
+		Cart cart = getCartById(cartId);
+		if(cart==null||cart.getCartItem().size()==0){
+			throw new IOException(cartId+" ");
+		}
+		update(cart);
+		return cart;
+		
 	}
 
 
