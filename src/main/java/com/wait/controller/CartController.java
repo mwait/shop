@@ -5,8 +5,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wait.model.Customer;
 import com.wait.service.CustomerService;
@@ -17,6 +17,7 @@ public class CartController {
 
 	@Autowired
 	CustomerService customerService;
+	
 	@RequestMapping
 	public String getCart(@AuthenticationPrincipal User activeUser){
 		
@@ -27,8 +28,9 @@ public class CartController {
 	}
 	
 	@RequestMapping ("/{cartId}")
-	public String getCartRedirect(@RequestParam("cartId") int cartId, Model model){
+	public String getCartRedirect(@PathVariable("cartId") int cartId, Model model){
 		model.addAttribute("cartId", cartId);
 		return "cart";
 	}
+	
 }
