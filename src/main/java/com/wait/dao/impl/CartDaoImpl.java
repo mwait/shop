@@ -22,6 +22,7 @@ public class CartDaoImpl implements CartDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
 	public Cart getCartById(int cartId) {
 		Session session = sessionFactory.getCurrentSession();
 		return (Cart) session.get(Cart.class, cartId);
@@ -38,7 +39,7 @@ public class CartDaoImpl implements CartDao {
 		if(cart==null||cart.getCartItem().size()==0){
 			throw new IOException(cartId+" ");
 		}
-		update(cart);
+	//	update(cart);
 		return cart;
 		
 	}

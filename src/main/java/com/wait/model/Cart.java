@@ -40,7 +40,7 @@ public class Cart implements Serializable {
 	@JsonIgnore
 	private Customer customer;
 	
-	private double grandTota;
+	private double grandTotal;
 
 	public int getCartId() {
 		return cartId;
@@ -66,12 +66,12 @@ public class Cart implements Serializable {
 		this.customer = customer;
 	}
 
-	public double getGrandTota() {
-		return grandTota;
+	public double getGrandTotal() {
+		return grandTotal;
 	}
 
-	public void setGrandTota(double grandTota) {
-		this.grandTota = grandTota;
+	public void setGrandTotal(double grandTotal) {
+		this.grandTotal = grandTotal;
 	}
 	
 	
